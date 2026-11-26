@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12213b">
+  <meta name="description" content="LabFlow 将实验室耗材档案、入库、领用、库存、预警与核对连接起来。在线体验八个业务工具，或下载完整的 Python 与 SQLite 本地版本。">
+  <title>LabFlow · 让实验室耗材管理有条理</title>
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <header class="site-header">
+    <div class="site-wrap site-header-inner">
+      <a class="site-brand" href="index.html" aria-label="LabFlow 首页">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 5v9l9 5 9-5V8M12 13v9M7.5 5.5l9 5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+        <span class="brand-wordmark">LabFlow</span><span class="brand-subtitle">实验室耗材管理</span>
+      </a>
+      <button class="mobile-nav-toggle" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="打开导航"><span></span><span></span><span></span></button>
+      <nav id="site-nav" class="site-nav" aria-label="网站导航"><a href="index.html" aria-current="page">首页</a><a href="guide.html">使用指南</a><a href="download.html">下载中心</a><a href="app.html" class="button button-primary nav-cta">进入工作台</a></nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="home-hero">
+      <div class="site-wrap hero-layout">
+        <div class="hero-copy">
+          <div class="hero-status"><span class="status-dot"></span>浏览器体验已开放<span class="hero-version">v0.2</span></div>
+          <h1>实验室里还剩什么，<br><span>打开就能查。</span></h1>
+          <p class="hero-lead">新到的耗材记入库，领走的记清数量和用途。<br class="desktop-break">剩多少、放在哪、要不要补货，都能在这里查。</p>
+          <div class="hero-actions"><a class="button button-primary button-large" href="app.html">进入工作台</a><a class="button button-secondary button-large" href="guide.html">查看使用指南</a></div>
+          <p class="hero-note">在线版本使用当前浏览器保存数据，可直接体验示例账号。</p>
+          <div class="hero-proof" aria-label="产品范围"><div><strong>8</strong><span>实用业务工具</span></div><div><strong>2</strong><span>运行方式</span></div><div><strong>1</strong><span>完整记录链路</span></div></div>
+        </div>
+        <div class="hero-visual">
+          <div class="preview-window" aria-label="业务示例：累计入库 22 个、领用 15 个，当前库存 7 个">
+            <div class="preview-topbar"><div class="preview-dots" aria-hidden="true"><i></i><i></i><i></i></div><span>实验室工作台</span><span class="preview-label">流程示例</span></div>
+            <div class="preview-content">
+              <div class="preview-nav" aria-hidden="true"><span class="preview-nav-logo">L</span><span class="is-active"><i></i>工作台</span><span><i></i>耗材档案</span><span><i></i>出入库</span><span><i></i>库存查询</span><span><i></i>库存核对</span><span class="preview-nav-foot">LabFlow</span></div>
+              <div class="preview-main">
+                <div class="preview-heading"><div><p>库存概览</p><h2>示例耗材</h2></div><span class="preview-ok">库存正常</span></div>
+                <div class="preview-stock"><div><span>当前库存</span><strong>7<small>个</small></strong></div><svg viewBox="0 0 86 62" fill="none" aria-hidden="true"><path d="M4 53h78M12 45V27M31 45V8M50 45V32M69 45V20" stroke="#bdd0fb" stroke-width="8" stroke-linecap="round"/><path d="M69 45V20" stroke="#2864e8" stroke-width="8" stroke-linecap="round"/></svg></div>
+                <div class="preview-metrics"><div><span>累计入库</span><strong>22 <small>个</small></strong></div><div><span>累计领用</span><strong>15 <small>个</small></strong></div><div><span>预警下限</span><strong>5 <small>个</small></strong></div></div>
+                <div class="preview-ledger"><div class="preview-ledger-head"><span>完整业务记录</span><span>数量</span></div><div><span><i class="ledger-dot in"></i>首次入库</span><strong class="text-green">+20</strong></div><div><span><i class="ledger-dot out"></i>实验领用</span><strong>−15</strong></div><div><span><i class="ledger-dot in"></i>补充入库</span><strong class="text-green">+2</strong></div></div>
+                <div class="preview-check"><span aria-hidden="true">✓</span>全历史核对：22 − 15 = 7</div>
+              </div>
+            </div>
+          </div>
+          <div class="preview-caption"><span class="caption-line"></span>每次数量变化，都能回到原始记录。</div>
+        </div>
+      </div>
+      <div class="site-wrap"><div class="benefit-strip"><span><i aria-hidden="true">01</i>固定单位，记录清楚</span><span><i aria-hidden="true">02</i>低库存及时提醒</span><span><i aria-hidden="true">03</i>领用记录可追溯</span><span><i aria-hidden="true">04</i>全部历史可核对</span></div></div>
+    </section>
+    <section id="features" class="section features-section">
+      <div class="site-wrap">
+        <div class="section-head"><div><p class="eyebrow">工具各司其职，数据彼此相连</p><h2 class="section-title">八个工具，串起日常工作。</h2></div><p class="section-copy">从第一条耗材档案，到每一次入库与领用，<br class="desktop-break">按需要打开工具，在同一套记录中继续工作。</p></div>
+        <div class="feature-grid">
+          <a class="feature-card" href="app.html?app=items"><div class="feature-card-top"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 5v9l9 5 9-5V8M12 13v9"/></svg></span><span class="feature-number">01</span></div><h3>耗材档案</h3><p>先录好名称、规格、单位和存放位置，后面入库、领用时直接选择。</p><span class="feature-category">基础维护</span></a>
+          <a class="feature-card" href="app.html?app=inbound"><div class="feature-card-top"><span class="feature-icon green"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12v8h16v-8M12 3v12m-4-4 4 4 4-4"/></svg></span><span class="feature-number">02</span></div><h3>入库登记</h3><p>记录新到货与补充耗材，成功登记后同步增加库存，保留业务单号。</p><span class="feature-category">管理员登记</span></a>
+          <a class="feature-card" href="app.html?app=outbound"><div class="feature-card-top"><span class="feature-icon warm"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12v8h16v-8M12 15V3m-4 4 4-4 4 4"/></svg></span><span class="feature-number">03</span></div><h3>领用登记</h3><p>选择耗材与领用成员，记录用途和数量，库存不足时阻止提交。</p><span class="feature-category">管理员登记</span></a>
+          <a class="feature-card" href="app.html?app=inventory"><div class="feature-card-top"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 10 5-10 5L2 8l10-5ZM3 12l9 5 9-5M3 16l9 5 9-5"/></svg></span><span class="feature-number">04</span></div><h3>库存查询</h3><p>按名称、编码或位置筛选，快速了解剩余数量与当前库存状态。</p><span class="feature-category">日常查询</span></a>
+          <a class="feature-card" href="app.html?app=movements"><div class="feature-card-top"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h7M9 12h7M9 16h7M7 8h.01M7 12h.01M7 16h.01"/></svg></span><span class="feature-number">05</span></div><h3>出入库流水</h3><p>查看业务时间、经办人与领用记录，按日期筛选并导出 CSV。</p><span class="feature-category">记录追溯</span></a>
+          <a class="feature-card" href="app.html?app=alerts"><div class="feature-card-top"><span class="feature-icon warm"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span><span class="feature-number">06</span></div><h3>低库存预警</h3><p>数量达到或低于下限时显示提醒，管理员可以按耗材调整阈值。</p><span class="feature-category">临界值提醒</span></a>
+          <a class="feature-card" href="app.html?app=reconciliation"><div class="feature-card-top"><span class="feature-icon green"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 9 4v5c0 5-5 8-9 10-4-2-9-5-9-10V7l9-4Z"/><path d="m8 12 3 3 5-6"/></svg></span><span class="feature-number">07</span></div><h3>库存核对</h3><p>用全部历史入库减去领用，与当前库存比较；发现差额时提示核查。</p><span class="feature-category">全历史核对</span></a>
+          <a class="feature-card" href="app.html?app=statistics"><div class="feature-card-top"><span class="feature-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 3v17h17M8 15V9M13 15V5M18 15v-4"/></svg></span><span class="feature-number">08</span></div><h3>数据统计</h3><p>查看业务笔数、常用耗材与数量分布，不同计量单位分别汇总。</p><span class="feature-category">真实记录汇总</span></a>
+        </div>
+        <p class="section-footnote">工具入口会保留目标页面。登录管理员可体验全部流程；成员账号可查询库存、预警与本人领用记录。</p>
+      </div>
+    </section>
+    <section id="workflow" class="section workflow-section">
+      <div class="site-wrap">
+        <div class="section-head"><div><p class="eyebrow">先走通一次，再开始使用</p><h2 class="section-title">四步，看清一笔业务的来龙去脉。</h2></div><p class="section-copy">以一个初始库存为 0、预警下限为 5 的耗材为例。<br class="desktop-break">点击步骤，观察库存、提醒与核对结果如何变化。</p></div>
+        <div class="workflow-layout">
+          <div class="demo-tabs" role="tablist" aria-label="业务演示步骤" aria-orientation="vertical">
+            <button class="demo-tab is-active" type="button" role="tab" id="demo-tab-0" aria-selected="true" aria-controls="demo-panel" data-demo-step="0"><span class="demo-step-number">01</span><span><strong>登记首次入库</strong><small>入库 20 个，建立可用库存</small></span></button>
+            <button class="demo-tab" type="button" role="tab" id="demo-tab-1" aria-selected="false" aria-controls="demo-panel" tabindex="-1" data-demo-step="1"><span class="demo-step-number">02</span><span><strong>领用并触发预警</strong><small>领用 15 个，剩余 5 个</small></span></button>
+            <button class="demo-tab" type="button" role="tab" id="demo-tab-2" aria-selected="false" aria-controls="demo-panel" tabindex="-1" data-demo-step="2"><span class="demo-step-number">03</span><span><strong>补充入库</strong><small>再入库 2 个，预警解除</small></span></button>
+            <button class="demo-tab" type="button" role="tab" id="demo-tab-3" aria-selected="false" aria-controls="demo-panel" tabindex="-1" data-demo-step="3"><span class="demo-step-number">04</span><span><strong>核对全部历史</strong><small>22 − 15 = 7，与库存一致</small></span></button>
+          </div>
+          <div id="demo-panel" class="demo-panel" role="tabpanel" aria-labelledby="demo-tab-0" tabindex="0">
+            <div class="demo-panel-top"><span class="tag">交互流程示例</span><span class="demo-unit">固定单位：个</span></div>
+            <div class="demo-result" aria-live="polite" aria-atomic="true"><div><p>当前库存</p><div class="demo-stock-number"><strong data-demo-stock>20</strong><span>个</span></div></div><div class="demo-result-state" data-demo-state><span class="state-indicator"></span><span data-demo-status>库存正常</span></div></div>
+            <div class="demo-equation"><div><span>累计入库</span><strong data-demo-in>20</strong></div><span class="equation-symbol" aria-hidden="true">−</span><div><span>累计领用</span><strong data-demo-out>0</strong></div><span class="equation-symbol" aria-hidden="true">=</span><div><span>流水净额</span><strong data-demo-ledger>20</strong></div></div>
+            <div class="demo-explanation"><h3 data-demo-title>第一笔库存，从入库开始。</h3><p data-demo-description>档案建立时库存为 0。登记入库 20 个后，当前库存变为 20，同时保留一条不可直接修改的入库记录。</p></div>
+            <p class="demo-safe-note">这里是独立的流程示意，不会更改工作台中的数据。</p>
+          </div>
+        </div>
+        <div class="workflow-bottom"><p>想亲自完成这一轮操作？指南提供示例账号、输入值和每一步的预期结果。</p><a class="button button-secondary" href="guide.html#first-run">开始 5 分钟演示</a></div>
+      </div>
+    </section>
+    <section id="modes" class="section modes-section">
+      <div class="site-wrap">
+        <div class="section-head"><div><p class="eyebrow">从轻松体验，到完整本地运行</p><h2 class="section-title">选择适合你的运行方式。</h2></div><p class="section-copy">两个版本使用相同的业务规则与界面。<br class="desktop-break">数据保存的位置和权限验证的方式有所不同。</p></div>
+        <div class="mode-grid">
+          <article class="mode-card browser-mode"><div class="mode-card-heading"><span class="mode-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><rect x="3" y="5" width="22" height="18" rx="3"/><path d="M3 10h22M7 7.5h.01M10 7.5h.01"/></svg></span><span class="tag tag-blue">当前线上版本</span></div><h3>浏览器体验</h3><p>打开网页即可试用，适合快速了解界面、业务流程与角色差异。</p><dl class="mode-facts"><div><dt>数据保存</dt><dd>当前浏览器的本地存储</dd></div><div><dt>使用账号</dt><dd>预置示例账号，角色切换用于演示</dd></div><div><dt>适合场景</dt><dd>在线体验、课堂展示、熟悉流程</dd></div></dl><div class="mode-boundary">换浏览器或换设备不会共享这里的数据；清除网站数据也会清除本地演示记录。</div><a class="button button-primary" href="app.html">打开浏览器体验</a></article>
+          <article class="mode-card local-mode"><div class="mode-card-heading"><span class="mode-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><rect x="3" y="4" width="22" height="16" rx="2"/><path d="M9 25h10M14 20v5M7 9l3 3-3 3M13 15h6"/></svg></span><span class="tag">可下载运行</span></div><h3>完整本地版</h3><p>在自己的电脑启动 Python 服务，体验由后端处理的登录、权限与库存事务。</p><dl class="mode-facts"><div><dt>数据保存</dt><dd>本机 SQLite 数据库</dd></div><div><dt>运行环境</dt><dd>Python 3.10 及以上，无需安装框架</dd></div><div><dt>适合场景</dt><dd>本地操作、程序验证、继续开发</dd></div></dl><div class="mode-boundary">下载后按指南启动服务；这一版本在本机运行，当前尚未提供云端账号或跨设备同步。</div><a class="button button-secondary" href="download.html">前往下载中心</a></article>
+        </div>
+      </div>
+    </section>
+    <section id="roadmap" class="section roadmap-section">
+      <div class="site-wrap roadmap-layout"><div class="roadmap-heading"><p class="eyebrow">一步一步，把网站做好</p><h2 class="section-title">从可用工具，<br>走向独立网站。</h2><p class="section-copy">先把当前版本做清楚、用顺手，再逐步完善真正需要的功能。</p><a class="text-link" href="guide.html#team">查看使用与迭代建议</a></div><div class="roadmap-list"><article class="roadmap-item"><span class="roadmap-marker complete" aria-hidden="true">✓</span><div><div class="roadmap-item-title"><h3>v0.1 · 业务基础</h3><span class="tag">已具备</span></div><p>八个业务工具、浏览器演示、本地 Python 后端与库存规则验证。</p></div></article><article class="roadmap-item current"><span class="roadmap-marker" aria-hidden="true"><i></i></span><div><div class="roadmap-item-title"><h3>v0.2 · 网站基础</h3><span class="tag tag-blue">本轮迭代</span></div><p>独立首页、使用指南、下载中心与统一导航，保留完整工作台。</p></div></article><article class="roadmap-item"><span class="roadmap-marker planned" aria-hidden="true"></span><div><div class="roadmap-item-title"><h3>后续 · 云端能力</h3><span class="tag">计划中</span></div><p>下一步先做账号和共享库存，让两个人在不同电脑上看到同一份数据。这部分还在计划中。</p></div></article></div></div>
+    </section>
+    <section class="closing-section"><div class="site-wrap"><div class="closing-panel"><div><p class="eyebrow">从第一条记录开始</p><h2>现在，走进你的实验室工作台。</h2><p>选择示例管理员账号，完整体验一次入库、领用与核对。</p></div><div class="closing-actions"><a class="button button-white" href="app.html">进入工作台</a><a class="button button-dark-outline" href="guide.html">先看使用指南</a></div></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="site-wrap"><div class="footer-top"><div><a class="site-brand" href="index.html"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 5v9l9 5 9-5V8M12 13v9" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span><span class="brand-wordmark">LabFlow</span></a><p class="footer-description">库存有数，领用有据。</p></div><nav class="footer-nav" aria-label="页脚导航"><a href="index.html">首页</a><a href="guide.html">使用指南</a><a href="download.html">下载中心</a><a href="app.html">进入工作台</a></nav></div><div class="footer-bottom"><span>LabFlow v0.2 · 实验室耗材管理</span><span>当前线上版本为浏览器体验，暂无云端同步。</span></div></div></footer>
+</body>
+</html>

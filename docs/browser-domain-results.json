@@ -1,0 +1,302 @@
+{
+  "title": "浏览器演示领域规则与适配器自动检查",
+  "executed_at": "2026-11-26T05:46:14.141Z",
+  "command": "node tests/browser-domain-checks.js",
+  "environment": {
+    "node": "v24.22.3",
+    "platform": "linux"
+  },
+  "data_scope": "全部检查使用独立程序夹具与请求替身，未读取、修改或伪造真实问卷和用户验收数据。",
+  "limitations": [
+    "本文件覆盖纯领域规则与模式选择，不等同于浏览器IndexedDB实际持久化、跨标签事务或界面验收。",
+    "D13只证明领域候选状态隔离与失败时输入不变；TC17实际提交失败回滚仍应以服务端事务测试及浏览器集成检查为依据。",
+    "浏览器账号和权限仅模拟角色；本地Python版提供服务端认证与授权。"
+  ],
+  "total": 32,
+  "passed": 32,
+  "failed": 0,
+  "results": [
+    {
+      "id": "D01",
+      "label": "正常入库增加库存并留下流水",
+      "related_cases": [
+        "TC01"
+      ],
+      "status": "passed",
+      "duration_ms": 1.5
+    },
+    {
+      "id": "D02",
+      "label": "入库与领用均拒绝0、负数、小数、字符串、布尔及非有限数",
+      "related_cases": [
+        "TC02",
+        "TC06"
+      ],
+      "status": "passed",
+      "duration_ms": 3.09
+    },
+    {
+      "id": "D03",
+      "label": "正常领用保存领用人及经办人",
+      "related_cases": [
+        "TC03"
+      ],
+      "status": "passed",
+      "duration_ms": 0.18
+    },
+    {
+      "id": "D04",
+      "label": "领用量等于库存允许归零，超过库存拒绝",
+      "related_cases": [
+        "TC04",
+        "TC05"
+      ],
+      "status": "passed",
+      "duration_ms": 0.43
+    },
+    {
+      "id": "D05",
+      "label": "相同单号规范化重试仅一条记录并返回最新库存",
+      "related_cases": [
+        "TC07"
+      ],
+      "status": "passed",
+      "duration_ms": 0.25
+    },
+    {
+      "id": "D06",
+      "label": "单号冲突覆盖数量、备注、领用人和经办人变化",
+      "related_cases": [
+        "TC08"
+      ],
+      "status": "passed",
+      "duration_ms": 0.39
+    },
+    {
+      "id": "D07",
+      "label": "普通成员与未登录者无法写入或借幂等重试越权",
+      "related_cases": [
+        "TC09"
+      ],
+      "status": "passed",
+      "duration_ms": 0.24
+    },
+    {
+      "id": "D08",
+      "label": "成员只获得本人身份与本人OUT记录，显式查他人返回403",
+      "related_cases": [
+        "TC10"
+      ],
+      "status": "passed",
+      "duration_ms": 1.2
+    },
+    {
+      "id": "D09",
+      "label": "查询匹配项与空结果且返回副本不能修改存储",
+      "related_cases": [
+        "TC11"
+      ],
+      "status": "passed",
+      "duration_ms": 0.17
+    },
+    {
+      "id": "D10",
+      "label": "20加10减7的全部历史与库存同时为23",
+      "related_cases": [
+        "TC12"
+      ],
+      "status": "passed",
+      "duration_ms": 0.39
+    },
+    {
+      "id": "D11",
+      "label": "预警覆盖低于、等于、高于下限",
+      "related_cases": [
+        "TC13",
+        "TC14",
+        "TC15"
+      ],
+      "status": "passed",
+      "duration_ms": 0.28
+    },
+    {
+      "id": "D12",
+      "label": "下限调整立即改变预警，非法下限不写入",
+      "related_cases": [
+        "TC16"
+      ],
+      "status": "passed",
+      "duration_ms": 0.32
+    },
+    {
+      "id": "D13",
+      "label": "领域候选状态与原状态隔离，拒绝的操作不产生半成品",
+      "related_cases": [
+        "TC17 (domain scope only)"
+      ],
+      "status": "passed",
+      "duration_ms": 0.24
+    },
+    {
+      "id": "D14",
+      "label": "补货解除预警且保留入库流水",
+      "related_cases": [
+        "TC18"
+      ],
+      "status": "passed",
+      "duration_ms": 0.13
+    },
+    {
+      "id": "D15",
+      "label": "档案零库存、唯一编码和必填校验",
+      "related_cases": [
+        "TC19"
+      ],
+      "status": "passed",
+      "duration_ms": 0.38
+    },
+    {
+      "id": "D16",
+      "label": "成员修改下限被拒绝",
+      "related_cases": [
+        "TC20"
+      ],
+      "status": "passed",
+      "duration_ms": 0.66
+    },
+    {
+      "id": "D17",
+      "label": "停用不预警且拒绝新出入库，启用后恢复，历史保留",
+      "related_cases": [
+        "TC21"
+      ],
+      "status": "passed",
+      "duration_ms": 0.17
+    },
+    {
+      "id": "D18",
+      "label": "停用后的相同单号重试仍成功，新单号被拒绝",
+      "related_cases": [
+        "TC07",
+        "TC21"
+      ],
+      "status": "passed",
+      "duration_ms": 0.14
+    },
+    {
+      "id": "D19",
+      "label": "隔离的损坏夹具显示差额2，核对使用全历史且不自动纠正",
+      "related_cases": [
+        "TC22"
+      ],
+      "status": "passed",
+      "duration_ms": 0.2
+    },
+    {
+      "id": "D20",
+      "label": "下限0仍在库存0时预警",
+      "related_cases": [
+        "BR05",
+        "BR09"
+      ],
+      "status": "passed",
+      "duration_ms": 0.08
+    },
+    {
+      "id": "D21",
+      "label": "固定单位、编码、直接写库存和伪造经办人均拒绝",
+      "related_cases": [
+        "BR03",
+        "BR06"
+      ],
+      "status": "passed",
+      "duration_ms": 0.2
+    },
+    {
+      "id": "D22",
+      "label": "入库上限1e9及超限检查，IN领用人规范化为空",
+      "related_cases": [
+        "BR01",
+        "BR04"
+      ],
+      "status": "passed",
+      "duration_ms": 0.13
+    },
+    {
+      "id": "D23",
+      "label": "日期过滤采用中国时区且拒绝无效日期和反向区间",
+      "related_cases": [
+        "BR08"
+      ],
+      "status": "passed",
+      "duration_ms": 0.26
+    },
+    {
+      "id": "D24",
+      "label": "示例种子12档案、真实期初与领用记录，逐项核对相符",
+      "related_cases": [
+        "BR08"
+      ],
+      "status": "passed",
+      "duration_ms": 2.84
+    },
+    {
+      "id": "D25",
+      "label": "仅示例凭据可登录，用户和持久化状态不带密码字段",
+      "related_cases": [
+        "BR06"
+      ],
+      "status": "passed",
+      "duration_ms": 3.63
+    },
+    {
+      "id": "A01",
+      "label": "file协议直接选择浏览器演示且不探测服务器",
+      "related_cases": [],
+      "status": "passed",
+      "duration_ms": 0.35
+    },
+    {
+      "id": "A02",
+      "label": "非API的HTML页面、404和初次网络不可达可选择浏览器演示",
+      "related_cases": [],
+      "status": "passed",
+      "duration_ms": 0.55
+    },
+    {
+      "id": "A03",
+      "label": "首次真实JSON API错误不降级到另一份浏览器数据",
+      "related_cases": [],
+      "status": "passed",
+      "duration_ms": 0.26
+    },
+    {
+      "id": "A04",
+      "label": "建立server模式后HTTP错误与断网均保留server模式",
+      "related_cases": [],
+      "status": "passed",
+      "duration_ms": 0.3
+    },
+    {
+      "id": "A05",
+      "label": "服务器调用使用同源cookie且重置带显式确认常量",
+      "related_cases": [],
+      "status": "passed",
+      "duration_ms": 0.26
+    },
+    {
+      "id": "A06",
+      "label": "IndexedDB不可用时清楚报错，不伪装为内存持久化",
+      "related_cases": [],
+      "status": "passed",
+      "duration_ms": 0.52
+    },
+    {
+      "id": "A07",
+      "label": "浏览器公开接口没有篡改存储或注入失败入口",
+      "related_cases": [],
+      "status": "passed",
+      "duration_ms": 0.15
+    }
+  ]
+}

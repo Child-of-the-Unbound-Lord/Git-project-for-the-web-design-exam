@@ -1,0 +1,17 @@
+data/
+__pycache__/
+*.pyc
+*.sqlite*
+*.db*
+dist/
+web/downloads/
+.sites-runtime/
+.sites-checkout/
+node_modules/
+*.log
+test-artifacts/
+直接打开_八个小程序.html
+.env
+.env.*
+!.env.example
+

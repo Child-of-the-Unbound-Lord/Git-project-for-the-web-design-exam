@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101d35">
+  <meta name="description" content="LabFlow 使用指南：示例账号、五分钟出入库演示、预警核对、两种运行方式和数据保存说明。">
+  <title>使用指南 · LabFlow</title>
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
+</head>
+<body data-page="guide">
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <header class="site-header">
+    <div class="site-wrap site-header-inner">
+      <a class="site-brand" href="index.html" aria-label="LabFlow 首页">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="M3 8v9l9 5 9-5V8M12 13v9"/></svg></span>
+        <span class="brand-wordmark">LabFlow</span><span class="brand-subtitle">实验室耗材管理</span>
+      </a>
+      <button class="mobile-nav-toggle" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="打开导航菜单">菜单</button>
+      <nav id="site-nav" class="site-nav" aria-label="主导航">
+        <a href="index.html">首页</a><a href="guide.html" aria-current="page">使用指南</a><a href="download.html">下载中心</a><a class="button button-primary nav-cta" href="app.html">进入工作台</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="site-wrap">
+        <p class="eyebrow">使用指南 · v0.2</p>
+        <h1 class="page-title">从第一笔登记开始</h1>
+        <p class="page-lead">用一份新建耗材，走完入库、领用、预警和核对。约五分钟，了解八个工具如何共享同一套记录。</p>
+        <a class="button button-primary" href="app.html">打开工作台</a>
+        <a class="button button-secondary" href="download.html">选择下载版本</a>
+      </div>
+    </section>
+
+    <div class="site-wrap document-layout section">
+      <aside class="toc" aria-label="本页目录">
+        <p class="card-title">本页内容</p>
+        <a href="#accounts">示例账号</a>
+        <a href="#first-run">五分钟演示</a>
+        <a href="#data-modes">两种运行方式</a>
+        <a href="#accounts-and-data">切换账号与数据</a>
+        <a href="#questions">常见问题</a>
+        <a href="#team">两人如何继续</a>
+      </aside>
+
+      <div class="doc-content">
+        <section id="accounts">
+          <p class="eyebrow">01 / 先登录</p>
+          <h2 class="section-title">选择一个示例身份</h2>
+          <p>在登录页点击身份卡片可以填入账号，也可以手动输入。先使用管理员完成业务，再退出并用成员身份查看自己的记录。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th scope="col">身份</th><th scope="col">用户名</th><th scope="col">示例密码</th><th scope="col">可以做什么</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">管理员</th><td><code>admin</code></td><td><code>Admin123!</code></td><td>维护耗材、登记出入库、设置下限、核对库存</td></tr>
+                <tr><th scope="row">成员 A</th><td><code>member_a</code></td><td><code>Member123!</code></td><td>查看库存、预警和本人领用记录</td></tr>
+                <tr><th scope="row">成员 B</th><td><code>member_b</code></td><td><code>Member123!</code></td><td>查看库存、预警和本人领用记录</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout"><strong>这是课程演示数据。</strong> 预置账号、耗材数量和流水用于体验功能，不能当作真实问卷回答、管理员意见或真实实验室记录。</div>
+        </section>
+
+        <section id="first-run">
+          <p class="eyebrow">02 / 动手走一遍</p>
+          <h2 class="section-title">五分钟演示路线</h2>
+          <p>下面的数字是本次练习的输入与预期结果。请在自己的页面操作后核对，实际结果以保存的记录为准。</p>
+          <ol class="step-list">
+            <li class="step">
+              <span class="step-number" aria-hidden="true">1</span>
+              <div class="step-body"><h3>建立一份新耗材</h3><p>管理员登录后，在“耗材档案”中新建：编码 <code>DEMO-01</code>，名称“演示连接线”，单位“包”，预警下限 <strong>5</strong>。保持启用。编码若已存在，换一个未使用的编码。</p><p class="muted">检查点：新档案的库存为 0。库存由后续入库形成，不直接填写库存数。</p><a href="app.html?app=items">打开耗材档案</a></div>
+            </li>
+            <li class="step">
+              <span class="step-number" aria-hidden="true">2</span>
+              <div class="step-body"><h3>入库 20 包</h3><p>在“入库登记”选择刚创建的耗材，数量填写 <strong>20</strong>，确认入库。随后到“库存查询”查看它。</p><p class="muted">检查点：当前库存为 20，并生成一条入库流水。</p><a href="app.html?app=inbound">打开入库登记</a></div>
+            </li>
+            <li class="step">
+              <span class="step-number" aria-hidden="true">3</span>
+              <div class="step-body"><h3>为成员 A 领用 15 包</h3><p>在“领用登记”选择同一耗材和“成员 A”，数量填写 <strong>15</strong>。保存后进入“低库存预警”。</p><p class="muted">检查点：库存为 5，等于下限 5，因此仍会预警。</p><a href="app.html?app=outbound">打开领用登记</a></div>
+            </li>
+            <li class="step">
+              <span class="step-number" aria-hidden="true">4</span>
+              <div class="step-body"><h3>补入 2 包，观察预警解除</h3><p>新建一笔入库，数量填写 <strong>2</strong>。刷新库存和预警列表。</p><p class="muted">检查点：库存变为 7，已高于下限 5，这份耗材不再出现在预警列表。</p><a href="app.html?app=alerts">打开低库存预警</a></div>
+            </li>
+            <li class="step">
+              <span class="step-number" aria-hidden="true">5</span>
+              <div class="step-body"><h3>用全部历史核对 7 包库存</h3><p>进入“库存核对”，点击“核对全部历史”，找到这份耗材。应看到全部入库 <strong>22</strong>、全部领用 <strong>15</strong>、流水净额 <strong>7</strong>、当前库存 <strong>7</strong>、差额 <strong>0</strong>。</p><p class="muted">计算过程：20 − 15 + 2 = 7。流水页的日期筛选不会缩小核对范围。</p><a href="app.html?app=reconciliation">打开库存核对</a></div>
+            </li>
+            <li class="step">
+              <span class="step-number" aria-hidden="true">6</span>
+              <div class="step-body"><h3>退出，换成员 A 查看</h3><p>点击侧栏账号旁的“退出登录”，用 <code>member_a</code> 登录。在“我的领用记录”中找到刚才领用的 15 包。再切换成员 B，这笔成员 A 的记录不应出现。</p><p class="muted">检查点：普通成员只查询本人领用；入库、领用登记和库存核对由管理员操作。</p><a href="app.html?app=movements">打开流水记录</a></div>
+            </li>
+          </ol>
+          <div class="callout"><strong>想多检查一个异常？</strong> 在第 3 步结束、库存还是 5 时，新建领用 6 包的单据。应提示库存不足，库存仍为 5，且不生成成功流水。检查后再做第 4 步。</div>
+        </section>
+
+        <section id="data-modes">
+          <p class="eyebrow">03 / 看清数据在哪里</p>
+          <h2 class="section-title">浏览器演示与本机服务</h2>
+          <p>工作台会显示当前模式。两种方式使用相同的业务界面，数据保存在不同位置。</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th scope="col">对比项</th><th scope="col">当前浏览器演示</th><th scope="col">本机 Python 服务</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">怎么打开</th><td>在线工作台，或下载后直接打开离线 HTML</td><td>下载源码，启动 Python 服务后访问终端显示的地址</td></tr>
+                <tr><th scope="row">数据位置</th><td>此浏览器、此站点的 IndexedDB</td><td>此电脑项目目录中的 <code>data/lab.db</code>（SQLite）</td></tr>
+                <tr><th scope="row">账号与权限</th><td>公开示例账号，模拟管理员和成员的操作差异</td><td>由服务器检查登录身份和操作权限</td></tr>
+                <tr><th scope="row">能否跨设备共享</th><td>不能；换浏览器、设备或站点地址不会自动带走数据</td><td>当前默认只在本机访问，也不会自动云同步</td></tr>
+                <tr><th scope="row">适合用途</th><td>快速体验页面、讲解流程、准备演示</td><td>查看和修改代码、运行后台、验证数据库与权限规则</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>云端共享数据和真实账号是下一轮的优先事项，当前版本尚未提供。不要把在一个浏览器里完成的操作理解为已经同步给另一名组员。</p>
+        </section>
+
+        <section id="accounts-and-data">
+          <p class="eyebrow">04 / 日常操作</p>
+          <h2 class="section-title">切换账号、保留记录与重置</h2>
+          <div class="grid-2">
+            <article class="content-card"><h3 class="card-title">切换账号</h3><p>先点“退出登录”，再填入另一个示例账号。退出只结束当前身份，不会删除耗材或流水。需要查看其他标签页新写入的数据时，点击工作台右上角的刷新按钮。</p></article>
+            <article class="content-card"><h3 class="card-title">保留自己的操作</h3><p>浏览器演示依赖当前浏览器存储；清除站点数据可能移除记录。本机版会保留 SQLite 数据库。页面支持导出 CSV，导出范围取决于当前筛选和账号权限。</p></article>
+          </div>
+          <div class="callout callout-warning"><strong>重置会替换当前数据集。</strong> 管理员点击“重置示例数据”并确认后，新增耗材、下限修改和出入库记录会被移除，恢复预置示例。先导出需要保留的记录；CSV 是查看资料，当前版本未提供 CSV 一键恢复。</div>
+          <p>需要备份本机版时，先关闭 Python 服务，再复制 <code>data/lab.db</code>。在线浏览器演示、离线 HTML 与本机版的存储相互独立，当前没有自动迁移功能。</p>
+        </section>
+
+        <section id="questions">
+          <p class="eyebrow">05 / 遇到问题时</p>
+          <h2 class="section-title">常见问题</h2>
+          <div class="faq-list">
+            <details><summary>离线 HTML 提示无法使用 IndexedDB，怎么办？</summary><p>当前浏览器可能限制本地文件持久存储。可以尝试支持该能力的浏览器，或下载源码并启动本机 Python 版。页面没有成功保存时，请按提示处理，不要只根据输入框里的内容判断已入账。</p><p><a href="download.html#source-start">查看本机版启动方法</a></p></details>
+            <details><summary>服务器断开后，页面会换成另一套数据吗？</summary><p>已经建立本机服务模式后，请求失败会提示错误，不会自动切换到浏览器演示数据。确认启动终端仍在运行，再刷新或使用原业务单号重试。</p></details>
+            <details><summary>为什么下限设为 0 还有预警？</summary><p>预警条件是“启用且当前库存小于或等于下限”。因此下限为 0、库存为 0 时仍会提醒。停用耗材不进入预警列表，历史记录仍保留。</p></details>
+            <details><summary>重复点击会多扣一次库存吗？</summary><p>同一业务单号、相同内容再次提交时返回原记录，不再重复入账。同一单号改成不同内容会报冲突。完成一笔后，点击“新建下一笔”再登记新的业务。</p></details>
+            <details><summary>核对显示差额，能直接把库存改成一致吗？</summary><p>核对只显示差异，不会自动改写库存或历史流水。先保留结果，检查输入、记录来源与操作过程，再由两人记录问题和修正方案。</p></details>
+          </div>
+        </section>
+
+        <section id="team">
+          <p class="eyebrow">06 / 让课设继续往前走</p>
+          <h2 class="section-title">两人各有一份明确交付</h2>
+          <div class="grid-2">
+            <article class="content-card"><h3 class="card-title">成员 A · 技术整合</h3><p>负责运行和讲解系统，整合页面、数据接口、出入库与核对逻辑；按实际修改更新报告，并整理演示流程。</p></article>
+            <article class="content-card"><h3 class="card-title">成员 B · 需求与测试</h3><p>负责真实问卷、管理员访谈和规则确认；逐步点击验证页面，记录输入、结果、截图及问题，重点复核预警与权限差异。</p></article>
+          </div>
+          <p>AI 已协助准备材料和程序，两人仍需理解自己负责的部分。真实问卷与访谈尚需实际完成；自动化检查结果不能替代调研事实或用户验收意见。</p>
+          <a class="button button-primary" href="app.html">开始一次完整演示</a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-wrap">
+      <div class="footer-top"><div><a class="site-brand" href="index.html"><span class="brand-wordmark">LabFlow</span><span class="brand-subtitle">实验室耗材管理</span></a><p class="muted">让每一笔库存变化有记录可查。</p></div><nav class="footer-nav" aria-label="页脚导航"><a href="index.html">首页</a><a href="guide.html" aria-current="page">使用指南</a><a href="download.html">下载中心</a><a href="app.html">进入工作台</a></nav></div>
+      <div class="footer-bottom"><span>LabFlow v0.2 · 网站基础版</span><span>课程演示项目 · 当前数据不会自动云同步</span></div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,386 @@
+{
+  "generated_at": "2026-11-26T14:10:58+08:00",
+  "python_version": "3.12.14",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "sqlite_version": "3.53.1",
+  "duration_seconds": 4.594,
+  "tests_run": 43,
+  "passed": 43,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "successful": true,
+  "report_cases_covered": [
+    "TC01",
+    "TC02",
+    "TC03",
+    "TC04",
+    "TC05",
+    "TC06",
+    "TC07",
+    "TC08",
+    "TC09",
+    "TC10",
+    "TC11",
+    "TC12",
+    "TC13",
+    "TC14",
+    "TC15",
+    "TC16",
+    "TC17",
+    "TC18",
+    "TC19",
+    "TC20",
+    "TC21",
+    "TC22"
+  ],
+  "scope": "真实执行的Python业务服务、隔离SQLite数据库、本机原始HTTP、CLI启动及下载构建测试；不包含真实问卷、管理员访谈或用户验收。",
+  "safety": "所有数据库均位于临时测试目录，未修改data/lab.db；故障注入仅由测试进程替换内部方法，没有HTTP故障入口。",
+  "launchers": "Windows批处理仅静态检查；本报告不声称在Windows或macOS真机运行。",
+  "results": [
+    {
+      "name": "__main__.ReportCases.test_TC01_normal_inbound",
+      "description": "TC01 正常入库20，库存与流水同时建立。",
+      "status": "passed",
+      "report_case": "TC01",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0463
+    },
+    {
+      "name": "__main__.ReportCases.test_TC02_invalid_inbound_quantities",
+      "description": "TC02 零、负数、小数、文字、布尔和空值入库全部拒绝。",
+      "status": "passed",
+      "report_case": "TC02",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0503
+    },
+    {
+      "name": "__main__.ReportCases.test_TC03_normal_outbound",
+      "description": "TC03 库存20领用7，剩余13并保存经办人与领用人。",
+      "status": "passed",
+      "report_case": "TC03",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0463
+    },
+    {
+      "name": "__main__.ReportCases.test_TC04_outbound_equal_stock",
+      "description": "TC04 领用量等于库存时允许并归零。",
+      "status": "passed",
+      "report_case": "TC04",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0468
+    },
+    {
+      "name": "__main__.ReportCases.test_TC05_outbound_over_stock",
+      "description": "TC05 库存8领用9被拒绝，库存和历史均不改变。",
+      "status": "passed",
+      "report_case": "TC05",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0439
+    },
+    {
+      "name": "__main__.ReportCases.test_TC06_invalid_outbound_quantities",
+      "description": "TC06 非法领用数量被拒绝。",
+      "status": "passed",
+      "report_case": "TC06",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0455
+    },
+    {
+      "name": "__main__.ReportCases.test_TC07_idempotent_replay",
+      "description": "TC07 同单号同内容两次提交只领用一次。",
+      "status": "passed",
+      "report_case": "TC07",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0466
+    },
+    {
+      "name": "__main__.ReportCases.test_TC08_business_number_conflict",
+      "description": "TC08 同单号不同数量返回冲突且不改变数据。",
+      "status": "passed",
+      "report_case": "TC08",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0492
+    },
+    {
+      "name": "__main__.ReportCases.test_TC09_member_cannot_write",
+      "description": "TC09 普通成员不能调用入库和领用管理操作。",
+      "status": "passed",
+      "report_case": "TC09",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0562
+    },
+    {
+      "name": "__main__.ReportCases.test_TC10_member_cannot_read_other_records",
+      "description": "TC10 成员只得到本人OUT记录，主动查询他人返回403。",
+      "status": "passed",
+      "report_case": "TC10",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0517
+    },
+    {
+      "name": "__main__.ReportCases.test_TC11_inventory_filter_empty_result",
+      "description": "TC11 编码或名称筛选返回匹配项，不存在的编码返回空列表。",
+      "status": "passed",
+      "report_case": "TC11",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0446
+    },
+    {
+      "name": "__main__.ReportCases.test_TC12_conservation",
+      "description": "TC12 从零入库20、10再领用7，库存与全历史净额均为23。",
+      "status": "passed",
+      "report_case": "TC12",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0516
+    },
+    {
+      "name": "__main__.ReportCases.test_TC13_below_threshold",
+      "description": "TC13 库存4下限5进入预警列表。",
+      "status": "passed",
+      "report_case": "TC13",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0456
+    },
+    {
+      "name": "__main__.ReportCases.test_TC14_equal_threshold",
+      "description": "TC14 库存5等于下限5仍进入预警列表。",
+      "status": "passed",
+      "report_case": "TC14",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0452
+    },
+    {
+      "name": "__main__.ReportCases.test_TC15_above_threshold",
+      "description": "TC15 库存6高于下限5不进入预警列表。",
+      "status": "passed",
+      "report_case": "TC15",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0496
+    },
+    {
+      "name": "__main__.ReportCases.test_TC16_threshold_update_validation",
+      "description": "TC16 调整下限改变预警，非法下限拒绝且保持原设置。",
+      "status": "passed",
+      "report_case": "TC16",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0521
+    },
+    {
+      "name": "__main__.ReportCases.test_TC17_transaction_rollback",
+      "description": "TC17 仅在隔离测试中注入写流水前失败，整笔库存事务回滚。",
+      "status": "passed",
+      "report_case": "TC17",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0442
+    },
+    {
+      "name": "__main__.ReportCases.test_TC18_restock_clears_alert",
+      "description": "TC18 库存4下限5，入库2后刷新解除预警。",
+      "status": "passed",
+      "report_case": "TC18",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0455
+    },
+    {
+      "name": "__main__.ReportCases.test_TC19_item_constraints",
+      "description": "TC19 新档案库存为零，重复编码、空名称及直接写库存被拒绝。",
+      "status": "passed",
+      "report_case": "TC19",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0421
+    },
+    {
+      "name": "__main__.ReportCases.test_TC20_member_cannot_set_threshold",
+      "description": "TC20 普通成员修改库存下限返回403，原值不变。",
+      "status": "passed",
+      "report_case": "TC20",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0417
+    },
+    {
+      "name": "__main__.ReportCases.test_TC21_inactive_and_zero_threshold",
+      "description": "TC21 停用保留历史并排除预警，启用恢复预警；零库存零下限仍预警。",
+      "status": "passed",
+      "report_case": "TC21",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0519
+    },
+    {
+      "name": "__main__.ReportCases.test_TC22_detect_tampering_full_history",
+      "description": "TC22 隔离测试库人为设库存10、历史8，日期筛选不影响全历史差额2。",
+      "status": "passed",
+      "report_case": "TC22",
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0455
+    },
+    {
+      "name": "__main__.AdditionalServiceCases.test_concurrent_same_business_number_commits_once",
+      "description": "12个同单号并发重试仅一笔入账，其余返回原流水。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "service+sqlite",
+      "duration_seconds": 0.1056
+    },
+    {
+      "name": "__main__.AdditionalServiceCases.test_concurrent_unique_outbounds_never_oversell",
+      "description": "12个并发请求竞争10件库存，恰好10笔成功且不出现负数。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "service+sqlite",
+      "duration_seconds": 0.3832
+    },
+    {
+      "name": "__main__.AdditionalServiceCases.test_database_constraints_enforce_types_and_references",
+      "description": "绕过服务层的隔离SQL写入仍受整数、非空、外键与非负约束保护。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0424
+    },
+    {
+      "name": "__main__.AdditionalServiceCases.test_normalization_and_immutable_item_fields",
+      "description": "规范化备注与IN领用人；编码、单位、库存不能通过更新修改。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0439
+    },
+    {
+      "name": "__main__.AdditionalServiceCases.test_password_hashing_sessions_and_persistence",
+      "description": "密码用随机盐PBKDF2保存，会话只存令牌摘要，重启不重置业务数据。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "service+sqlite",
+      "duration_seconds": 0.1186
+    },
+    {
+      "name": "__main__.AdditionalServiceCases.test_quantity_limit_and_invalid_recipient",
+      "description": "库存最大值与有效领用人规则由服务端拒绝越界写入。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0509
+    },
+    {
+      "name": "__main__.AdditionalServiceCases.test_reconciliation_snapshot_during_concurrent_writes",
+      "description": "读写并发时核对使用一致快照，不将不同时点误报为库存差额。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "service+sqlite",
+      "duration_seconds": 0.2313
+    },
+    {
+      "name": "__main__.AdditionalServiceCases.test_replay_after_empty_inactive_and_later_stock_change",
+      "description": "同内容重试在库存耗尽及耗材停用后仍成功，当前数量单独刷新。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "service+sqlite",
+      "duration_seconds": 0.0583
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_idempotency_and_conflict_status",
+      "description": "真实HTTP：重复提交保持200并标记幂等，内容冲突为409。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.114
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_json_and_unsupported_fields",
+      "description": "真实HTTP：非法JSON、非标准数值与伪造故障字段被拒绝。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.1085
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_login_cookie_and_anonymous_state",
+      "description": "真实HTTP：匿名会话、401、密码登录与HttpOnly/SameSite Cookie。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.1375
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_logout_and_expiration",
+      "description": "真实HTTP：退出撤销会话，已过期Cookie不再能读取受限数据。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.1443
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_member_authorization_and_replay",
+      "description": "真实HTTP：成员越权写入、预警、核对及查询他人记录被403拒绝。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.1111
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_no_fault_or_mutable_movement_endpoints",
+      "description": "真实HTTP：无故障注入接口，流水无编辑和删除接口。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.1015
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_origin_host_and_content_type",
+      "description": "真实HTTP：跨站Origin、伪造Host、跨站元信息和表单内容类型被拒绝。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.0995
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_query_alerts_and_china_dates",
+      "description": "真实HTTP：库存筛选、预警和北京时间自然日筛选；核对不受日期参数限制。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.1093
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_reset_requires_confirmation",
+      "description": "真实HTTP：明确确认后才重置演示数据，当前管理员获新会话。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.2171
+    },
+    {
+      "name": "__main__.HTTPContractCases.test_http_static_query_and_path_safety",
+      "description": "真实HTTP：静态首页支持查询参数，不能越过web目录读取后端文件。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "http",
+      "duration_seconds": 0.0624
+    },
+    {
+      "name": "__main__.StartupIntegrationCases.test_failed_release_preserves_database_and_session",
+      "description": "CLI构建失败清晰报错且不启动服务，已有数据库和会话不变。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "startup+http+release",
+      "duration_seconds": 0.0474
+    },
+    {
+      "name": "__main__.StartupIntegrationCases.test_help_does_not_build_downloads",
+      "description": "CLI帮助在构建和数据库初始化前结束，不生成下载文件。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "startup+http+release",
+      "duration_seconds": 0.0383
+    },
+    {
+      "name": "__main__.StartupIntegrationCases.test_real_cli_start_generates_downloads_and_preserves_state",
+      "description": "Linux实际CLI启动生成三类下载包，原始HTTP核对MIME/字节/ZIP和既有数据会话。",
+      "status": "passed",
+      "report_case": null,
+      "layer": "startup+http+release",
+      "duration_seconds": 0.1768
+    }
+  ]
+}
