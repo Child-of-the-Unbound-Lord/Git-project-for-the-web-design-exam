@@ -7,8 +7,8 @@ import re
 import os
 
 ROOT = Path(__file__).resolve().parent
-VERSION = "0.2"
-DEFAULT_PREFIX = "LabFlow_v0.2"
+VERSION = "0.3"
+DEFAULT_PREFIX = "LabFlow_v0.3"
 DOWNLOAD_DIR = ROOT / "web" / "downloads"
 
 
@@ -44,9 +44,9 @@ def create_release(output_dir, prefix=DEFAULT_PREFIX):
     readme_path.write_text((ROOT / "README.md").read_text(encoding="utf-8"), encoding="utf-8")
     excluded_dirs = {".git", ".openai", "dist", "data", "__pycache__", "node_modules", ".sites-runtime", ".sites-checkout", "test-artifacts"}
     excluded_files = {"BUILD_CONTRACT.md", "WEBSITE_CONTRACT.md"}
-    root_sources = {".gitignore", "README.md", "build_static.py", "package_release.py", "seed.json", "server.py", "start_windows.bat", "start_macos_linux.sh", "打开小程序.html"}
+    root_sources = {".gitignore", "wrangler.toml", ".python-version", "README.md", "build_static.py", "package_release.py", "seed.json", "server.py", "start_windows.bat", "start_macos_linux.sh", "打开小程序.html"}
     source_extensions = {"web": {".html", ".css", ".js", ".json", ".svg", ".png", ".ico"},
-                         "docs": {".md", ".json", ".txt"}, "tests": {".py", ".js", ".json"}}
+                         "docs": {".md", ".json", ".txt"}, "tests": {".py", ".js", ".json", ".mjs"}, "src": {".mjs", ".js", ".sql"}}
     temporary = output / f".{prefix}_source.zip.tmp"
     with ZipFile(temporary, "w", ZIP_DEFLATED) as z:
         for path in sorted(ROOT.rglob("*")):

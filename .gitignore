@@ -10,8 +10,8 @@ web/downloads/
 node_modules/
 *.log
 test-artifacts/
-直接打开_八个小程序.html
-.env
-.env.*
-!.env.example
 
+
+.wrangler/
+.dev.vars*
+!.dev.vars.example

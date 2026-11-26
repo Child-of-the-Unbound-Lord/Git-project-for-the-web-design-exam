@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101d35">
-  <meta name="description" content="下载 LabFlow v0.2 源代码、单文件离线演示和运行说明，了解启动要求与已执行的自动化检查范围。">
+  <meta name="description" content="下载 LabFlow v0.3 源代码、单文件离线演示和运行说明，了解启动要求与已执行的自动化检查范围。">
   <title>下载中心 · LabFlow</title>
   <link rel="stylesheet" href="site.css">
   <script src="site.js" defer></script>
@@ -27,7 +27,7 @@
   <main id="main-content">
     <section class="page-hero">
       <div class="site-wrap">
-        <p class="eyebrow">下载中心 · v0.2</p>
+        <p class="eyebrow">下载中心 · v0.3</p>
         <h1 class="page-title">把 LabFlow 带到你的电脑</h1>
         <p class="page-lead">要运行后台、修改代码，选择源码包。想先演示流程，选择离线 HTML。两种版本都使用明确标记的示例数据。</p>
         <a class="button button-secondary" href="guide.html">先看使用指南</a>
@@ -43,7 +43,7 @@
           <h3 class="card-title">完整源代码包</h3>
           <p>包含网站页面、八个业务功能、Python 服务、SQLite 数据处理、演示数据、启动脚本和自动化检查记录。</p>
           <p class="download-meta">ZIP · 需要 Python 3.10 或更高版本</p>
-          <a class="button button-primary" href="downloads/LabFlow_v0.2_source.zip" download>下载源代码 ZIP</a>
+          <a class="button button-primary" href="downloads/LabFlow_v0.3_source.zip" download>下载源代码 ZIP</a>
           <p class="muted">解压整个文件夹后启动，不要只取出单个网页文件。</p>
         </article>
         <article class="download-card">
@@ -51,7 +51,7 @@
           <h3 class="card-title">单文件离线演示</h3>
           <p>一个 HTML 包含工作台所需的页面资源。下载后双击打开，体验耗材、出入库、预警、核对和统计。</p>
           <p class="download-meta">HTML · 仅浏览器演示模式</p>
-          <a class="button button-secondary" href="downloads/LabFlow_v0.2_offline.html" download>下载离线 HTML</a>
+          <a class="button button-secondary" href="downloads/LabFlow_v0.3_offline.html" download>下载离线 HTML</a>
           <p class="muted">角色为演示模拟；不包含可运行的 Python 后台。</p>
         </article>
         <article class="download-card">
@@ -59,8 +59,8 @@
           <h3 class="card-title">快速运行说明</h3>
           <p>保留启动步骤、示例账号和版本使用说明。交接给另一名组员时，可与源码包一起保存。</p>
           <p class="download-meta">TXT · 可用文本编辑器打开</p>
-          <a class="button button-secondary" href="downloads/LabFlow_v0.2_readme.txt" download>下载运行说明</a>
-          <p class="muted">文件名称均带 v0.2，方便与后续版本区分。</p>
+          <a class="button button-secondary" href="downloads/LabFlow_v0.3_readme.txt" download>下载运行说明</a>
+          <p class="muted">文件名称均带 v0.3，便于区分版本。</p>
         </article>
       </div>
     </section>
@@ -93,15 +93,15 @@
         <table>
           <thead><tr><th scope="col">检查内容</th><th scope="col">当前记录</th><th scope="col">覆盖范围</th></tr></thead>
           <tbody>
-            <tr><th scope="row">后台与启动下载集成检查</th><td><strong>43 项通过</strong></td><td>原有 40 项后台检查，加 3 项启动与下载集成检查；覆盖业务规则、事务、并发、权限、HTTP 接口及本轮启动下载流程</td></tr>
+            <tr><th scope="row">本地后台与集成检查</th><td><strong>43 项通过</strong></td><td>原有 40 项后台检查，加 3 项启动与下载集成检查；覆盖业务规则、事务、并发、权限、HTTP 接口及本轮启动下载流程</td></tr>
             <tr><th scope="row">浏览器领域与适配器检查</th><td><strong>32 项通过</strong></td><td>独立夹具中的领域规则、账号隔离与运行模式选择</td></tr>
-            <tr><th scope="row">实际浏览器逐页点击验收</th><td><strong>尚未完成</strong></td><td>仍需逐页验证操作、不同屏幕和浏览器存储行为，并记录结果</td></tr>
+            <tr><th scope="row">云端服务端逻辑</th><td><strong>18 项通过</strong></td><td>在隔离测试库检验账户、权限、库存同步语义和并发事务</td></tr><tr><th scope="row">页面渲染烟测</th><td><strong>11 项通过</strong></td><td>DOM 渲染模拟，不能替代真实点击验收</td></tr><tr><th scope="row">实际浏览器逐页点击验收</th><td><strong>尚未完成</strong></td><td>仍需逐页验证操作、不同屏幕和浏览器存储行为，并记录结果</td></tr>
             <tr><th scope="row">真实需求问卷与用户验收</th><td><strong>需两人实际开展</strong></td><td>调查回答、管理员规则确认和真实使用反馈</td></tr>
           </tbody>
         </table>
       </div>
       <p>自动化记录来自源码包中的 <code>docs/backend-test-results.json</code> 与 <code>docs/browser-domain-results.json</code>。后者不代表实际浏览器多标签持久化已完成验收。现有通过记录也不等于全部验证完成。</p>
-      <div class="callout"><strong>本轮先把独立网站基础做好。</strong> 首页、指南、下载中心和工作台入口已经分开。下一轮优先完善云端共享数据和真实账号，再逐步加入成员管理、备份、日志和部署维护。</div>
+      <div class="callout"><strong>v0.3 增加共享库存与正式账号代码。</strong> 云端初始化和跨设备用户验收还需在实际网站完成。</div>
       <a class="button button-primary" href="app.html">进入工作台</a>
       <a class="button button-secondary" href="guide.html#first-run">按步骤体验</a>
     </section>
@@ -110,7 +110,7 @@
   <footer class="site-footer">
     <div class="site-wrap">
       <div class="footer-top"><div><a class="site-brand" href="index.html"><span class="brand-wordmark">LabFlow</span><span class="brand-subtitle">实验室耗材管理</span></a><p class="muted">让每一笔库存变化有记录可查。</p></div><nav class="footer-nav" aria-label="页脚导航"><a href="index.html">首页</a><a href="guide.html">使用指南</a><a href="download.html" aria-current="page">下载中心</a><a href="app.html">进入工作台</a></nav></div>
-      <div class="footer-bottom"><span>LabFlow v0.2 · 网站基础版</span><span>课程演示项目 · 当前数据不会自动云同步</span></div>
+      <div class="footer-bottom"><span>LabFlow v0.3 · 网站基础版</span><span>本机和离线版本仍不与云端数据同步</span></div>
     </div>
   </footer>
 </body>

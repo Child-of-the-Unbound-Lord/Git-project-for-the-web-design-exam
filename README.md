@@ -1,82 +1,52 @@
-# LabFlow · 实验室耗材管理
+# LabFlow · 实验室耗材管理 v0.3
 
-这是一个两人软件工程课程项目。页面能登记耗材、入库和领用，也能查库存、看预警、核对历史记录。
+两人软件工程课程项目：耗材档案、入库、领用、库存查询、流水、预警、核对与统计共享业务模型；本轮新增 Cloudflare Workers + D1 云端 API、正式账号及管理员成员管理界面。
 
-课程仓库：[Git-project-for-the-web-design-exam](https://github.com/Child-of-the-Unbound-Lord/Git-project-for-the-web-design-exam)。本仓库保存网站源码、运行说明、测试和参考资料，后续可以连接 Cloudflare Pages 自动构建和发布。**Cloudflare 网站与共享数据库尚未部署。**
+- **代码和隔离自动测试已完成**，云端部署是否成功、数据库是否实际自动绑定、首次初始化及跨设备验收需在 Cloudflare 控制台和真实浏览器确认。不要将自动化通过误认为线上验收通过。
+- **云端模式**：业务数据保存在 D1；由服务端处理认证、权限、库存变更与会话；默认没有任何公开演示账号。管理员首设后创建成员。
+- **本机完整版本**：`python3 server.py`，使用本机 SQLite 和旧版示例身份。
+- **离线版本**：下载 HTML 后直接试用，数据保存在本浏览器 IndexedDB，**不与云端同步**。
 
-## 先说清楚：现在能运行哪一版
+## Cloudflare Workers 部署
 
-| 运行方式 | 数据放在哪里 | 账号和权限 |
-| --- | --- | --- |
-| Cloudflare Pages 静态网站 | 当前浏览器的 IndexedDB | 使用示例账号演示角色区别 |
-| 本地 Python 版 | 本机 SQLite 数据库 | 由 Python 服务端检查登录和权限 |
+Cloudflare 已通过 GitHub 连接到公开课程仓库：
+[Git-project-for-the-web-design-exam](https://github.com/Child-of-the-Unbound-Lord/Git-project-for-the-web-design-exam)。
 
-静态网站可以在浏览器里操作八个功能，但不同电脑不会共享库存。真实云端账号、共享数据库和跨设备同步还没有接入。演示耗材、人员、数量和流水均为合成数据，不代表真实调研结果。
+`wrangler.toml` 配置了 `main = "src/worker.mjs"`、静态资源 `dist` 和自动创建的 `DB`（D1）绑定。Cloudflare 的构建命令为 `npx wrangler deploy`；Wrangler 的 `[build]` 钩子会先运行 `python3 build_static.py`。GitHub Actions 另运行后端、云端接口、业务规则和页面渲染的隔离自动测试。
 
-## 推荐部署：GitHub + Cloudflare Pages
+### 首次上线与管理员初始化
 
-先用平台分配的 `pages.dev` 地址即可，不必先购买域名。
+1. 在 Cloudflare → Workers & Pages → 本项目 → Deployments 中核对最新版本是否 `Ready`，并确认 Workers 绑定存在 `DB`（D1）。自动分配 D1 属于 Wrangler beta，未确认之前不要写成已完成。
+2. 在 **Settings → Variables and Secrets** 添加 Secret `ADMIN_SETUP_TOKEN`，由本人生成并保管不少于24字符的随机值。**不要提交到 Git、发到聊天、写进文档或截图**。
+3. 打开网站 `app.html`，按“创建首位管理员”页面填写账号、自己的强密码和上一步的初始化凭证。首个管理员建立后该入口会关闭。
+4. 管理员登录，在“成员管理”新增一个普通成员账号，首次密码单独、安全地交给对应本人，并提醒其登录后修改。
+5. 两个人在不同浏览器/电脑登录；管理员创建一个耗材，入库20、领用15，普通成员刷新后看到同一份库存。检验库存不足、成员不能调用管理接口、同单号重试与退出登录后会话失效。按 `docs/云端初始化与多人验收.md` 记录真实结果。
 
-1. 使用上方课程仓库的 `main` 分支。
-2. 根目录包含 `build_static.py`、`package_release.py`、`web/` 和本 README。若另建副本，也保持这一结构，不要再套一层文件夹。
-3. 登录 Cloudflare，在 Pages 中使用 **Git 集成**新建项目，选择这个 GitHub 仓库。
-4. 按下面的配置构建。
-5. 部署成功后，打开 Cloudflare 返回的 `pages.dev` 地址。以后把修改推送到 `main`，由 Git 集成继续构建和更新。
+**如果部署失败**：查 Cloudflare Build 日志是否提示数据库资源自动创建失败或 Wrangler 版本问题；也可以在 Cloudflare 手动建立 D1、绑定变量名 `DB`。如需改 `wrangler.toml` 补入已创建数据库的 ID，请只使用控制台显示的真实 ID，不要编造。
 
-| 配置项 | 填写内容 |
-| --- | --- |
-| Production branch | `main` |
-| Framework preset | `None` |
-| Build command | `python3 build_static.py` |
-| Build output directory | `dist` |
-| Root directory | 留空，使用仓库根目录 |
-| 构建环境变量 | 建议设置 `PYTHON_VERSION=3.12.14` |
+正式上线前要确保默认 Demo 账号不对公网服务开放，云端 Worker 不会回退到浏览器本地模拟数据。仅在 `file://` 离线演示或明确没有 `/api/` 的静态站点使用浏览器数据层。
 
-本项目不用 npm，不需要安装前端依赖，也不需要额外的 GitHub Actions 流程。
-
-**请从 Git 集成开始创建项目。** 这份目录按“修改源码、推送仓库、自动更新”的方式准备，后续维护不用每次手动上传网页。
-
-当前课程仓库是公开仓库，下载中心也会向网站访客提供经过脱敏的源码 ZIP。演示中使用的是合成数据；运行数据库、会话文件和本机配置不应提交。网站访问权限与仓库可见性分别配置。
-
-详细步骤与常见问题见 [部署到 GitHub 与 Cloudflare](docs/部署到GitHub与Cloudflare.md)。
-
-## 先在本机构建一次
-
-建议使用本地已验证的 Python 3.12.14：
-
-```bash
-python3 build_static.py
-```
-
-Windows 也可以使用：
-
-```powershell
-py -3 build_static.py
-```
-
-构建完成后，`dist/` 是要托管的网页目录。脚本还会生成源码 ZIP、离线演示 HTML 和说明 TXT，网站下载中心的按钮因此有实际文件可下载。
-
-`dist/` 和 `web/downloads/` 都是生成结果，已经在 `.gitignore` 中忽略，不需要提交到仓库。Cloudflare 会从源码重新生成。
-
-## 本地运行带后台的版本
-
-需要 Python 3.10 或更高版本，不依赖第三方 Python 包。
+## 本地运行与检验
 
 ```bash
 python3 server.py
+python3 tests/test_server.py
+node tests/browser-domain-checks.js
+node tests/cloud-worker-checks.mjs
+node tests/ui-render-checks.js
+python3 build_static.py
 ```
 
-Windows 可执行 `py -3 server.py`，也可以双击 `start_windows.bat`；macOS/Linux 可执行 `bash start_macos_linux.sh`。
+Windows 下使用 `py -3 server.py`；本机 Python 版需要 Python 3.10 或更高，Node 只用于开发测试。`dist/` 和 `web/downloads/` 为构建输出，不提交到 Git。
 
-默认访问地址是 `http://127.0.0.1:8000`，从首页进入工作台。首次运行会建立演示数据库，之后启动会保留数据。不要把 `data/` 目录提交到 Git。
+## 项目结构
 
-| 示例身份 | 用户名 | 密码 |
-| --- | --- | --- |
-| 管理员 | `admin` | `Admin123!` |
-| 成员 A | `member_a` | `Member123!` |
-| 成员 B | `member_b` | `Member123!` |
-
-这些账号用于课程演示，不能直接用作正式网站账号。
+- `src/worker.mjs`：云端 API、授权、密码哈希、库存接口。
+- `src/schema.mjs`：D1 数据表、唯一约束和库存流水原子触发器。
+- `web/`：首页、指南、下载页和工作台；`web/api.js` 在云端与离线演示之间选择数据源。
+- `server.py`：旧版完整本地 Python 服务；`seed.json` 仅供本地/离线演示。
+- `tests/`：原有业务测试、云端后端隔离测试及 DOM 渲染烟测。
+- `docs/云端初始化与多人验收.md`：成员分工、实际操作步骤、截图记录表和已知限制。
 
 ## 八个功能
 
@@ -86,7 +56,7 @@ Windows 可执行 `py -3 server.py`，也可以双击 `start_windows.bat`；macO
 
 先让两个人在不同电脑上看到同一份库存，再完善成员管理和备份。
 
-现有 `server.py` 面向本地运行，不能直接原样托管就当作正式后端。上线前需要适配允许的 Host、HTTPS 来源、绑定地址、平台端口、数据库持久保存方式以及正式账号。当前导出没有加入这些能力。
+现有 `server.py` 面向本地运行，不能直接原样托管就当作正式后端。上线前需要适配允许的 Host、HTTPS 来源、绑定地址、平台端口、数据库持久保存方式以及正式账号。现有 Worker 已加入云端接口，但首次初始化与跨设备检查仍需落实。
 
 测试记录保留了 v0.2 的实际运行结果。本次外部部署导出只核对构建、脚本语法和页面链接，没有把 GitHub 或 Cloudflare 的实际部署写成已经完成。
 

@@ -47,7 +47,7 @@
     if (env.location && env.location.protocol === 'file:') return useBrowser();
     let response;
     try { response = await fetchJSON('/api/session', { method: 'GET' }, true); }
-    catch (_) { return useBrowser(); } // Only the initial unavailable-server probe may fall back.
+    catch (failure) { throw failure; } // An unreachable server cannot silently become a separate local inventory.
     if (response.status === 404) return useBrowser();
     const contentType = response.headers && response.headers.get('content-type') || '';
     if (!/\bjson\b|\+json/i.test(contentType)) return useBrowser();
@@ -95,7 +95,13 @@
     },
     async listMovements(filters) { return api.movements(filters); },
     async reconcile() { return call('reconcile', '/api/reconciliation', 'GET', undefined, []); },
-    async resetDemo() { return call('resetDemo', '/api/demo/reset', 'POST', { confirm: 'RESET_DEMO' }, []); }
+    async resetDemo() { return call('resetDemo', '/api/demo/reset', 'POST', { confirm: 'RESET_DEMO' }, []); },
+    async setupStatus() { await init(); if(selectedMode !== 'server') return {needs_setup:false,configured:false}; return request('/api/setup/status'); },
+    async setupAdmin(payload) { await init(); if(selectedMode !== 'server') throw error('CLOUD_ONLY','此操作需要云端服务器。'); return request('/api/setup/admin','POST',payload); },
+    async createUser(payload) { await init(); if(selectedMode !== 'server') throw error('CLOUD_ONLY','成员管理仅适用于云端网站。'); return request('/api/users','POST',payload); },
+    async updateUser(id,payload) { await init(); if(selectedMode !== 'server') throw error('CLOUD_ONLY','成员管理仅适用于云端网站。'); return request('/api/users/'+encodeURIComponent(id),'PATCH',payload); },
+    async resetUserPassword(id,password) { await init(); if(selectedMode !== 'server') throw error('CLOUD_ONLY','成员管理仅适用于云端网站。'); return request('/api/users/'+encodeURIComponent(id)+'/password','POST',{password}); },
+    async changePassword(current_password,new_password) { await init(); if(selectedMode !== 'server') throw error('CLOUD_ONLY','请在云端网站修改密码。'); return request('/api/account/password','POST',{current_password,new_password}); }
   };
   return Object.freeze(api);
 });

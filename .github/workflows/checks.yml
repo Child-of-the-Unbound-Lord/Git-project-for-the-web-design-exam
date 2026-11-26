@@ -1,39 +1,37 @@
 name: LabFlow checks
-
 on:
   push:
-    branches: [main]
+    branches: [main, 'feature/*']
   pull_request:
-
 permissions:
   contents: read
-
 jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Test Python backend
         run: python -m unittest discover -s tests -p 'test_*.py' -q
       - name: Test browser business rules
         run: node tests/browser-domain-checks.js
-      - name: Build Cloudflare Pages output
+      - name: Test cloud API with isolated DB
+        run: node tests/cloud-worker-checks.mjs
+      - name: Render smoke test for all business pages
+        run: node tests/ui-render-checks.js
+      - name: Build static assets
         run: python build_static.py
-      - name: Check static site and downloads
+      - name: Check site output
         run: |
           test -s dist/index.html
           test -s dist/app.html
           test -s dist/guide.html
           test -s dist/download.html
-          test -s dist/downloads/LabFlow_v0.2_source.zip
-          test -s dist/downloads/LabFlow_v0.2_offline.html
+          test -s dist/downloads/LabFlow_v0.3_source.zip
+          test -s dist/downloads/LabFlow_v0.3_offline.html
