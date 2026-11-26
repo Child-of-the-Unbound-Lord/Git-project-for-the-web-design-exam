@@ -1,0 +1,12 @@
+# LabFlow static website deployed by Cloudflare Workers Builds.
+# Cloudflare runs `npx wrangler deploy` for the connected main branch.
+# The Wrangler build hook creates dist/ and downloadable demo artifacts.
+name = "git-project-for-the-web-design-exam"
+compatibility_date = "2026-11-26"
+workers_dev = true
+
+[build]
+command = "python3 build_static.py"
+
+[assets]
+directory = "./dist"
