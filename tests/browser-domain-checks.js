@@ -234,11 +234,15 @@ function apiFixture(responses, protocol = 'http:') {
     assert.equal(f.api.mode, 'browser'); assert.equal(f.calls.length, 0); assert.equal(f.fallbackCalls(), 1);
     assert.equal((await f.api.session()).mode, 'browser');
   });
-  await check('A02', '非API的HTML页面、404和初次网络不可达可选择浏览器演示', [], async () => {
-    for (const response of [{ status: 200, ok: true, headers: { get: () => 'text/html' } }, jsonReply({ ok: false, error: { code: 'NOT_FOUND' } }, 404), new Error('unreachable')]) {
+  await check('A02', '只有明确的静态站点404或HTML才回退演示，网络错误不能冒充共享数据', [], async () => {
+    for (const response of [{ status: 200, ok: true, headers: { get: () => 'text/html' } }, jsonReply({ ok: false, error: { code: 'NOT_FOUND' } }, 404)]) {
       const f = apiFixture([response]); await f.api.init(); assert.equal(f.api.mode, 'browser'); assert.equal(f.fallbackCalls(), 1);
     }
+    const f = apiFixture([new Error('unreachable')]);
+    await assert.rejects(() => f.api.init(), e => e.code === 'NETWORK_ERROR');
+    assert.equal(f.api.mode, null); assert.equal(f.fallbackCalls(), 0);
   });
+
   await check('A03', '首次真实JSON API错误不降级到另一份浏览器数据', [], async () => {
     const f = apiFixture([jsonReply({ ok: false, error: { code: 'AUTH_REQUIRED', message: '请登录' } }, 401)]);
     await assert.rejects(f.api.init(), e => e.code === 'AUTH_REQUIRED');
